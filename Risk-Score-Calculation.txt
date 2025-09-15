@@ -1,0 +1,12 @@
+Risk Score Calculation
+
+Per Sensor Risk:
+Low: No violations (score: 0.0–0.3).
+Medium: 1–2 violations or sustained minor violations (score: 0.3–0.6).
+High: >2 violations, critical violations (e.g., shock + temperature), or missing data (score: 0.6–1.0).
+
+Overall Risk Score:
+Weighted average of sensor risk scores (weights: temperature=0.4, shock=0.3, humidity=0.15, GPS=0.1, battery=0.05).
+Example: If T100=0.6, X5=0.3, H200=0.6, S50=1.0, G12=0.0, B10=0.0:
+           Score = (0.40.6 + 0.40.3 + 0.150.6 + 0.31.0 + 0.10.0 + 0.050.0) = 0.68 (High).
+
