@@ -1,0 +1,19 @@
+Sensor Rules
+The system supports the following sensors with predefined threshold rules:
+
+Sensor                Type                 Min Threshold   Max Threshold   Unit   Violation Type
+ThermoProbe T-100     Core Temperature     2.0             8.0             °C     Temperature Spike
+TempTrack X5          Surface Temperature  2.0             8.0             °C     Temperature Spike
+HumidSensor H-200     Relative Humidity    40.0            60.0            %      Humidity Out of Range
+ShockLog S-50         Shock                0.0             5.0             g      Shock Detected
+GPS ColdTrack G-12    Route Deviation      0.0             500.0           m      Route Deviation
+BatteryMonitor B-10   Battery Voltage      2.5             3.3             V      Low Battery
+
+Violation Detection
+Threshold Violations: Readings outside min/max thresholds.
+Sustained Violations: 3+ consecutive readings outside thresholds (for temperature/humidity).
+Spike Detection: Rapid changes (e.g., >2°C between readings).
+Correlated Violations: Simultaneous shock and temperature violations trigger critical alerts.
+Missing Data: No readings for 10+ minutes flagged as violations.
+
+
