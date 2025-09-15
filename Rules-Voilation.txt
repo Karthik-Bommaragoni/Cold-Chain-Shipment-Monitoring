@@ -1,3 +1,6 @@
+Task-2
+Rules and Voilation Logic
+
 Sensor Rules
 The system supports the following sensors with predefined threshold rules:
 
@@ -9,11 +12,21 @@ ShockLog S-50         Shock                0.0             5.0             g    
 GPS ColdTrack G-12    Route Deviation      0.0             500.0           m      Route Deviation
 BatteryMonitor B-10   Battery Voltage      2.5             3.3             V      Low Battery
 
-Violation Detection
-Threshold Violations: Readings outside min/max thresholds.
-Sustained Violations: 3+ consecutive readings outside thresholds (for temperature/humidity).
-Spike Detection: Rapid changes (e.g., >2°C between readings).
-Correlated Violations: Simultaneous shock and temperature violations trigger critical alerts.
-Missing Data: No readings for 10+ minutes flagged as violations.
+Violation Detection Logic
+Threshold Violations:For each reading, compare the value against the sensor’s min_threshold and max_threshold.
+If value < min_threshold or value > max_threshold, log a violation.
+
+Sustained Violations:For temperature and humidity, flag a violation if readings exceed thresholds for 3 consecutive measurements (e.g., 15 minutes at 5-minute intervals).
+
+Spike Detection:For ThermoProbe T-100 and TempTrack X5, detect rapid changes (e.g., >2°C change between consecutive readings).
+
+Correlation-Based Violations:If a shock event (ShockLog S-50 > 5g) occurs simultaneously with a temperature spike, escalate to a critical alert.
+
+Missing Data:If no reading is received for a sensor within 10 minutes, flag a “Missing Data” violation.
+
+Data Consistency:Handle missing readings by interpolating values (linear interpolation) for summary statistics.
+Flag delayed readings (timestamp older than expected) as potential issues.
+
+
 
 
